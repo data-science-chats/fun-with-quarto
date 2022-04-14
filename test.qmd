@@ -1,0 +1,105 @@
+---
+title: "My Quarto Doc"
+author: Sam Csik
+date: 2022-04-14
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    code-link: true
+execute:
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Welcome to my quarto doc!
+
+### What is Quarto?
+
+-   quarto is a way of life, a document, a system (lol) that is built for multiple languages (unlike RMarkdown which is a tool developed for R but we've hacked to work with other languages)
+
+-   looks VERY similar to RMarkdown (you're already about 90% of the way there)
+
+### Steps:
+
+1.  open `.qmd` file
+
+2.  switch between source & visual editors
+
+3.  Render (not knit, from `knitr`)
+
+4.  hash pipes `#|` for chunk options
+
+5.  no more global options knitr chunk (all goes in yaml
+
+    execute:
+
+    warning: false
+
+    message: false
+
+6.  author, date in yaml has a more "modern feel"
+
+7.  `#| label: fig-something`, `#| fig-cap: "something"` (use kebab case)
+
+8.  reference figs in-text by their label `@fig-something`
+
+9.  add mpg plot + callout to add axis labels
+
+10. add a tip callout
+
+11. add panel-tabset
+
+12. add second fig to first chunk with updated chunk options `fig-subcap:`, `layout-ncol: 2`, and `column: page`
+
+::: callout-note
+## This plot still needs updated axis labels!
+
+```{r}
+#| label: fig-mpg
+#| fig-cap: "This is my mpg figure"
+#| fig-subcap: 
+#|  - "Color by number of cylinders"
+#|  - "Color by engine displacement, in liters"
+#| fig-alt: "Here is my very descriptive alt text for this first figure"
+#| layout-ncol: 2
+#| column: page
+
+ggplot(mpg, aes(x = hwy, y = cty, color = cyl)) +
+  geom_point(alpha = 0.5) +
+  scale_color_viridis_c() +
+  theme_minimal()
+
+ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
+  geom_point(alpha = 0.5) +
+  scale_color_viridis_c() +
+  theme_minimal()
+```
+:::
+
+@fig-mpg is my first ever cross-referenced quarto figure and I'm very excited about it. @fig-mpg-1 is colored by number of cylinders and @fig-mpg-2 is colored by engine displacement.
+
+::: callout-tip
+Reminder! In Visual editor mode, you can add callouts under the Insert drop down menu.
+:::
+
+## Surprise! Tabsets!
+
+::: panel-tabset
+## my first tab
+
+hello, it's me
+
+## my second tab
+
+surprise, there's more content here!
+:::
