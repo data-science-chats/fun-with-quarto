@@ -1,2 +1,3 @@
-# fun-with-quarto
-trying out the new thing!
+# Exploring Quarto!
+
+Trying out the new, hot tool during NCEAS data-science-chats
