@@ -18,7 +18,6 @@ editor_options:
 #| echo: false
 
 library(tidyverse)
-library(palmerpenguins)
 ```
 
 ## Welcome to my quarto doc!
@@ -29,7 +28,7 @@ library(palmerpenguins)
 
 -   looks VERY similar to RMarkdown (you're already about 90% of the way there)
 
-### Steps:
+### Things to try out:
 
 1.  open `.qmd` file
 
@@ -39,7 +38,7 @@ library(palmerpenguins)
 
 4.  hash pipes `#|` for chunk options
 
-5.  no more global options knitr chunk (all goes in yaml
+5.  no more global options knitr chunk (all goes in yaml)
 
     execute:
 
@@ -60,6 +59,10 @@ library(palmerpenguins)
 11. add panel-tabset
 
 12. add second fig to first chunk with updated chunk options `fig-subcap:`, `layout-ncol: 2`, and `column: page`
+
+13. add a table using the visual editor "Insert" drop down menu
+
+14. render a plot output in the document margin
 
 ::: callout-note
 ## This plot still needs updated axis labels!
@@ -101,5 +104,36 @@ hello, it's me
 
 ## my second tab
 
-surprise, there's more content here!
+surprise, there's more content here! You can also add a code chunk to include figure/table outputs
+
+```{r}
+ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
+  geom_point(alpha = 0.5) +
+  scale_color_viridis_c() +
+  theme_minimal()
+```
 :::
+
+::: callout-tip
+Use the Visual editor to easily add and edit tables!
+:::
+
+| Col1 | Col2  | Col3 |
+|------|-------|------|
+| 100  | hello | \-   |
+| 200  | it's  | \-   |
+| 300  | me    | \-   |
+
+You can now also render plot/table outputs in the margin of your quarto doc using the `column: margin` chunk option!!! Check out some of the other code chunk options (below) for adding a table label, caption, and caption location:
+
+```{r}
+#| column: margin 
+#| label: tbl-mtcars
+#| tbl-cap: first three columns and rows of the mtcars dataset
+#| tbl-cap-location: top
+
+knitr::kable(
+  mtcars[1:3, 1:3]
+)
+```
+
